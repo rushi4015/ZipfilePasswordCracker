@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ZIP Password Cracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 40px 30px 30px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #2d3748;
+            margin-bottom: 24px;
+        }
+        label {
+            font-weight: 500;
+            color: #4a5568;
+        }
+        input[type="file"] {
+            margin: 16px 0 24px 0;
+            width: 100%;
+        }
+        button {
+            background: #4f8cff;
+            color: #fff;
+            border: none;
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        .result {
+            margin-top: 32px;
+            padding: 18px;
+            border-radius: 8px;
+            background: #e9f7ef;
+            color: #256029;
+            font-size: 1.1rem;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .fail {
+            background: #ffeaea;
+            color: #b91c1c;
+        }
+        .time {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 ZIP Password Cracker</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="zipfile">Upload ZIP file:</label><br>
+            <input type="file" name="zipfile" id="zipfile" accept=".zip" required><br>
+            <button type="submit">Crack ZIP Password</button>
+            <input type="hidden" name="method" value="zipcracker">
+        </form>
+        {% if result %}
+            <div class="result{% if '❌' in result %} fail{% endif %}">
+                {{ result }}
+                <div class="time">Time taken: {{ time }} seconds</div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
